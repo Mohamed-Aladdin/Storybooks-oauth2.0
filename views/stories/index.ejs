@@ -1,0 +1,50 @@
+<%- include("../partials/header") %>
+
+<title>Public Stories</title>
+</head>
+<body>
+
+<%- include("../partials/navbar") %>
+
+<h1>Stories</h1>
+<ul class="search-form">
+    <li>    
+        <form id="search-site"  action='/stories/search/:query' method='get'>
+            <div class="input-group">
+                    <i class="fas fa-search fa-large" ></i>
+                    <div class="input-field">
+                    <input id="search" type="search" name='query' placeholder="Search by title">
+                    <label class="label-icon" for="search">
+                    </label>
+                 </div>
+                <button type="submit" class="input-group-addon btn">search</button>
+            </div>
+
+        </form>  
+    </li>   
+</ul>
+<div class="row">
+  <% if (stories.length === 0) { %>
+    <p>No stories to display!</p>
+    <% } else { %>
+    <% stories.forEach((story) => { %>
+      <div class="col s12 m4">
+        <div class="card">
+            <div class="card-content center-align">
+                <h5><%= story.title %></h5>
+                <p><%= `${story.body.slice(3, -5).substr(0, 100)}...` %></p>
+                <br>
+                <div class="chip">
+                    <img src="<%= story.user.image %>" alt="">
+                    <a href="/stories/user/<%= story.user._id %>"><%= story.user.displayName %></a>
+                </div>
+            </div>
+            <div class="card-action center-align">
+                <a href="/stories/<%= story._id %>" class="btn grey">Read More</a>
+            </div>
+        </div>
+    </div>
+    <% })} %>
+</div>
+
+<%- include("../partials/footer") %>

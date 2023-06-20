@@ -1,0 +1,21 @@
+p {
+  margin: 10px 0 !important;
+}
+
+.login-container {
+  width: 400px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.card {
+  padding: 3%;
+}
+
+.delete {
+  display: inline-block;
+}
+
+.blue {
+  float: left;
+}

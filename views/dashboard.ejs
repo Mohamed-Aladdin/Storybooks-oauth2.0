@@ -1,0 +1,51 @@
+<%- include("partials/header") %>
+
+<title>Storybooks Dashboard</title>
+</head>
+<body>
+  
+<%- include("partials/navbar") %>
+
+<div class="fixed-action-btn">
+  <a href="/stories/add" class="btn-floating btn-large waves-effect waves-light red"><i class="fas fa-plus"></i></a>
+</div>
+
+<h4>Dashboard</h4>
+<h3>Welcome <%= name %></h3>
+<h5>Here are you stories:</h5>
+
+<% if (stories.length === 0) { %>
+  <p>You've not created any stories!</p>
+<% } else { %>
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% stories.forEach((story) => { %>
+        <tr>
+          <td><a href="/stories/<%= story._id %>"><%= story.title %></a></td>
+          <td><%= story.created %></td>
+          <td><span class="dash-status"><%= story.status %></span></td>
+          <td>
+            <div class="card-action center-align">
+              <a href="/stories/edit/<%= story._id %>" class="btn blue">Edit</a>
+
+              <form class="delete" action="/stories/<%= story._id %>" method="post">
+                <input type="hidden" name="_method", value="DELETE">
+                <button class="btn red" type="submit">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include("partials/footer") %>
